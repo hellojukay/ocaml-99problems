@@ -61,6 +61,10 @@ let rec is_palindrome (lst : 'a list) =
 (* 20. Remove the K'th element from a list. (easy) *)
 (* 21. Insert an element at a given position into a list. (easy) *)
 (* 22. Create a list containing all integers within a given range. (easy) *)
+let rec range m n =
+  if m = n then [ m ]
+  else if m > n then m :: range (m - 1) n
+  else m :: range (m + 1) n
 (* 23. Extract a given number of randomly selected elements from a list. (medium) *)
 (* 24. Lotto: Draw N different random numbers from the set 1..M. (easy) *)
 (* 25. Generate a random permutation of the elements of a list. (easy) *)
