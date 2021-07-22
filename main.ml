@@ -53,6 +53,9 @@ let rec is_palindrome (lst : 'a list) =
 (* 12. Decode a run-length encoded list. (medium) *)
 (* 13. Run-length encoding of a list (direct solution). (medium) *)
 (* 14. Duplicate the elements of a list. (easy) *)
+let rec duplicate lst =
+  match lst with [] -> [] | head :: next -> head :: head :: duplicate next
+
 (* 15. Replicate the elements of a list a given number of times. (medium) *)
 (* 16. Drop every N'th element from a list. (medium) *)
 let drop lst n =
