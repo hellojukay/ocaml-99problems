@@ -57,6 +57,17 @@ let rec duplicate lst =
   match lst with [] -> [] | head :: next -> head :: head :: duplicate next
 
 (* 15. Replicate the elements of a list a given number of times. (medium) *)
+let rec duplicate lst n =
+  if n <= 1 then lst
+  else
+    match lst with
+    | [] -> []
+    | head :: next ->
+        let rec generate x n =
+          match n with 1 -> [ x ] | n -> x :: generate x (n - 1)
+        in
+        generate head n @ duplicate next n
+
 (* 16. Drop every N'th element from a list. (medium) *)
 let drop lst n =
   let i = ref 1 in
