@@ -65,6 +65,7 @@ let rec range m n =
   if m = n then [ m ]
   else if m > n then m :: range (m - 1) n
   else m :: range (m + 1) n
+
 (* 23. Extract a given number of randomly selected elements from a list. (medium) *)
 (* 24. Lotto: Draw N different random numbers from the set 1..M. (easy) *)
 (* 25. Generate a random permutation of the elements of a list. (easy) *)
@@ -80,6 +81,21 @@ let rec range m n =
 (* 37. Calculate Euler's totient function φ(m) (improved). (medium) *)
 (* 38. Compare the two methods of calculating Euler's totient function. (easy) *)
 (* 39. A list of prime numbers. (easy) *)
+let rec all_primes n m =
+  if n > m then []
+  else
+    let is_primes n =
+      if n < 0 then false
+      else
+        try
+          for i = 2 to n do
+            if n mod i = 0 then if i != n then raise Exit
+          done;
+          true
+        with Exit -> false
+    in
+    if is_primes n then n :: all_primes (n + 1) m else all_primes (n + 1) m
+
 (* 40. Goldbach's conjecture. (medium) *)
 (* 41. A list of Goldbach compositions. (medium) *)
 (* 46 & 47. Truth tables for logical expressions (2 variables). (medium) *)
