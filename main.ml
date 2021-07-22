@@ -55,6 +55,18 @@ let rec is_palindrome (lst : 'a list) =
 (* 14. Duplicate the elements of a list. (easy) *)
 (* 15. Replicate the elements of a list a given number of times. (medium) *)
 (* 16. Drop every N'th element from a list. (medium) *)
+let drop lst n =
+  let i = ref 1 in
+  List.filter
+    (fun x ->
+      if !i != 3 then (
+        i := !i + 1;
+        true)
+      else (
+        i := 1;
+        false))
+    lst
+
 (* 17. Split a list into two parts; the length of the first part is given. (easy) *)
 (* 18. Extract a slice from a list. (medium) *)
 (* 19. Rotate a list N places to the left. (medium) *)
