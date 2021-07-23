@@ -82,6 +82,15 @@ let drop lst n =
     lst
 
 (* 17. Split a list into two parts; the length of the first part is given. (easy) *)
+let rec split lst n =
+  match lst with
+  | [] -> ([], [])
+  | head :: next ->
+      if n = 1 then ([ head ], next)
+      else
+        let a, b = split next (n - 1) in
+        (head :: a, b)
+
 (* 18. Extract a slice from a list. (medium) *)
 (* 19. Rotate a list N places to the left. (medium) *)
 (* 20. Remove the K'th element from a list. (easy) *)
