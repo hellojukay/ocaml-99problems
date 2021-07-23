@@ -47,6 +47,20 @@ let rec is_palindrome (lst : 'a list) =
 
 (* 7. Flatten a nested list structure. (medium) *)
 (* 8. Eliminate consecutive duplicates of list elements. (medium) *)
+let rec compress lst =
+  match lst with
+  | [] -> []
+  | [ n ] -> [ n ]
+  | head :: next ->
+      let rec delete_prefix n lst =
+        match lst with
+        | [] -> []
+        | [ m ] -> if n = m then [] else [ m ]
+        | head :: next ->
+            if head = n then delete_prefix n next else head :: next
+      in
+      head :: compress (delete_prefix head next)
+
 (* 9. Pack consecutive duplicates of list elements into sublists. (medium) *)
 (* 10. Run-length encoding of a list. (easy) *)
 (* 11. Modified run-length encoding. (easy) *)
