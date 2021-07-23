@@ -117,6 +117,20 @@ let rec range m n =
 (* 23. Extract a given number of randomly selected elements from a list. (medium) *)
 (* 24. Lotto: Draw N different random numbers from the set 1..M. (easy) *)
 (* 25. Generate a random permutation of the elements of a list. (easy) *)
+let permutation lst =
+  match lst with
+  | [] -> []
+  | [ n ] -> [ n ]
+  | lst ->
+      let n = Random.int (List.length lst) in
+      let e = List.nth lst n in
+      let rec remove lst n =
+        match lst with
+        | [] -> []
+        | head :: next -> if n = 0 then next else head :: remove next (n - 1)
+      in
+      e :: remove lst n
+
 (* 26. Generate the combinations of K distinct objects chosen from the N elements of a list. (medium) *)
 (* 27. Group the elements of a set into disjoint subsets. (medium) *)
 (* 28. Sorting a list of lists according to length of sublists. (medium) *)
