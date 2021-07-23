@@ -46,6 +46,22 @@ let rec is_palindrome (lst : 'a list) =
     with Exit -> false
 
 (* 7. Flatten a nested list structure. (medium) *)
+type 'a node = One of 'a | Many of 'a node list
+
+let flatten n =
+  match n with
+  | One x -> [ x ]
+  | Many lst ->
+      let rec loop l =
+        match l with
+        | [] -> []
+        | head :: next -> (
+            match head with
+            | One x -> [ x ] @ loop next
+            | Many ll -> loop ll @ loop next)
+      in
+      loop lst
+
 (* 8. Eliminate consecutive duplicates of list elements. (medium) *)
 let rec compress lst =
   match lst with
