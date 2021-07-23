@@ -34,7 +34,7 @@ let () =
     \     \n"
   in
   let file = "main.ml" in
-  let output = open_out "test.md" in
+  let output = open_out "README.md" in
   Printf.fprintf output "%s" title;
 
   let lines = lines_of_file file in
