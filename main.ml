@@ -86,7 +86,8 @@ let rec split lst n =
   match lst with
   | [] -> ([], [])
   | head :: next ->
-      if n = 1 then ([ head ], next)
+      if n = 0 then ([], lst)
+      else if n = 1 then ([ head ], next)
       else
         let a, b = split next (n - 1) in
         (head :: a, b)
@@ -95,6 +96,13 @@ let rec split lst n =
 (* 19. Rotate a list N places to the left. (medium) *)
 (* 20. Remove the K'th element from a list. (easy) *)
 (* 21. Insert an element at a given position into a list. (easy) *)
+let rec insert_at e n lst =
+  if n = 0 then e :: lst
+  else
+    match lst with
+    | [] -> [ e ]
+    | head :: next -> head :: insert_at e (n - 1) next
+
 (* 22. Create a list containing all integers within a given range. (easy) *)
 let rec range m n =
   if m = n then [ m ]
