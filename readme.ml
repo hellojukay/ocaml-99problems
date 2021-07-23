@@ -45,7 +45,7 @@ let () =
       if i + 1 = length then
         Printf.fprintf output "- [ ] %s\n" (comment_to_string line)
       else if is_code (List.nth lines (i + 1)) then
-        Printf.fprintf output "- [x] %s [finished](main.ml#L%d) \n"
+        Printf.fprintf output "- [x] %s [[finished]](main.ml#L%d) \n"
           (comment_to_string line) (i + 1)
       else Printf.fprintf output "- [ ] %s\n" (comment_to_string line)
   done;
