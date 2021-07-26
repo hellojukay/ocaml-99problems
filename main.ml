@@ -78,6 +78,25 @@ let rec compress lst =
       head :: compress (delete_prefix head next)
 
 (* 9. Pack consecutive duplicates of list elements into sublists. (medium) *)
+let pack lst =
+  let result = ref [] in
+  let tmp = ref [] in
+  let len = ref (List.length lst) in
+  let j = ref 0 in
+  for i = 0 to !len - 1 do
+    let this = List.nth lst i in
+    let pre = List.nth lst !j in
+    if this = pre then (
+      j := i;
+      tmp := this :: !tmp)
+    else (
+      result := !result @ [ !tmp ];
+      j := i;
+      tmp := [ this ])
+  done;
+  result := !result @ [ !tmp ];
+  !result
+
 (* 10. Run-length encoding of a list. (easy) *)
 (* 11. Modified run-length encoding. (easy) *)
 (* 12. Decode a run-length encoded list. (medium) *)
