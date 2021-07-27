@@ -20,8 +20,8 @@ let is_comment line =
   Str.string_match r line 0
 
 let is_code line =
-  let r = Str.regexp "^let" in
-  Str.string_match r line 0
+  Str.string_match (Str.regexp "^let") line 0
+  || Str.string_match (Str.regexp "^type") line 0
 
 let comment_to_string line =
   let first = Str.replace_first (Str.regexp "^(\\* ") "" line in
