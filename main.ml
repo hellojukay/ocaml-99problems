@@ -195,6 +195,13 @@ let rec split lst n =
         (head :: a, b)
 
 (* 18. Extract a slice from a list. (medium) *)
+let slice list n m =
+  let result = ref [] in
+  for i = 0 to List.length list - 1 do
+    if i >= n && i <= m then result := !result @ [ List.nth list i ]
+  done;
+  !result
+
 (* 19. Rotate a list N places to the left. (medium) *)
 (* 20. Remove the K'th element from a list. (easy) *)
 let rec remove_at n lst =
