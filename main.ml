@@ -138,6 +138,21 @@ let encode lst =
   !result
 
 (* 12. Decode a run-length encoded list. (medium) *)
+let rec decode lst =
+  match lst with
+  | [] -> []
+  | head :: next ->
+      let gen = function
+        | One n -> [ n ]
+        | Many (n, x) ->
+            let result = ref [] in
+            for i = 1 to n do
+              result := x :: !result
+            done;
+            !result
+      in
+      gen head @ decode next
+
 (* 13. Run-length encoding of a list (direct solution). (medium) *)
 (* 14. Duplicate the elements of a list. (easy) *)
 let rec duplicate lst =
