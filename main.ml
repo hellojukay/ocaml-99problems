@@ -98,6 +98,24 @@ let pack lst =
   !result
 
 (* 10. Run-length encoding of a list. (easy) *)
+let encode lst =
+  if List.length lst == 0 then []
+  else
+    let result = ref [] in
+    let j = ref 0 in
+    let count = ref 0 in
+    for i = 0 to List.length lst - 1 do
+      let this = List.nth lst i in
+      let pre = List.nth lst !j in
+      if this == pre then count := !count + 1
+      else (
+        result := !result @ [ (!count, pre) ];
+        count := 1);
+      j := i
+    done;
+    result := !result @ [ (!count, List.nth lst !j) ];
+    !result
+
 (* 11. Modified run-length encoding. (easy) *)
 (* 12. Decode a run-length encoded list. (medium) *)
 (* 13. Run-length encoding of a list (direct solution). (medium) *)
