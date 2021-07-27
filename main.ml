@@ -117,6 +117,26 @@ let encode lst =
     !result
 
 (* 11. Modified run-length encoding. (easy) *)
+type 'a rle = One of 'a | Many of int * 'a
+
+let encode lst =
+  let j = ref 0 in
+  let result = ref [] in
+  let count = ref 0 in
+  for i = 0 to List.length lst - 1 do
+    let this = List.nth lst i in
+    let pre = List.nth lst !j in
+    if this == pre then count := !count + 1
+    else (
+      if !count > 1 then result := !result @ [ Many (!count, pre) ]
+      else result := !result @ [ One pre ];
+      count := 1);
+    j := i
+  done;
+  if !count > 1 then result := !result @ [ Many (!count, List.nth lst !j) ]
+  else result := !result @ [ One (List.nth lst !j) ];
+  !result
+
 (* 12. Decode a run-length encoded list. (medium) *)
 (* 13. Run-length encoding of a list (direct solution). (medium) *)
 (* 14. Duplicate the elements of a list. (easy) *)
