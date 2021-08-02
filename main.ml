@@ -154,6 +154,17 @@ let rec decode lst =
       gen head @ decode next
 
 (* 13. Run-length encoding of a list (direct solution). (medium) *)
+let encode lst =
+  let make e count = match count with 1 -> One e | n -> Many (n, e) in
+  let rec loop e count list =
+    match list with
+    | [] -> [ make e count ]
+    | n :: next ->
+        if e = n then loop e (count + 1) next
+        else [ make e count ] @ loop n 1 next
+  in
+  match lst with [] -> [] | head :: next -> loop head 1 next
+
 (* 14. Duplicate the elements of a list. (easy) *)
 let rec duplicate lst =
   match lst with [] -> [] | head :: next -> head :: head :: duplicate next
