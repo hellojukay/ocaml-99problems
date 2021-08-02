@@ -214,6 +214,18 @@ let slice list n m =
   !result
 
 (* 19. Rotate a list N places to the left. (medium) *)
+let rec rotate lst n =
+  if n = 0 then lst
+  else
+    let len = List.length lst in
+    if n < 0 then rotate lst (len - (abs n mod len))
+    else if n < len then
+      match lst with
+      | [] -> []
+      | [ n ] -> [ n ]
+      | head :: next -> rotate (next @ [ head ]) (n - 1)
+    else rotate lst (len mod n)
+
 (* 20. Remove the K'th element from a list. (easy) *)
 let rec remove_at n lst =
   match lst with
